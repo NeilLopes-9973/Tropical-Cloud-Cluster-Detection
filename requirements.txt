@@ -1,0 +1,31 @@
+# ITCC Project - Consolidated Dependencies
+# Generated: October 2025
+
+# Core dependencies
+Pillow>=10.0.0
+albumentations>=1.3.0
+h5py>=3.8.0
+ipython>=8.0.0
+jupyter>=1.0.0
+kaleido>=0.2.1  # For Plotly static image export
+markdown>=3.5.0
+matplotlib>=3.7.0
+matplotlib>=3.7.0  # For visualization
+numpy>=1.24.0
+opencv-python>=4.8.0
+pandas>=2.0.0
+pandas>=2.0.0     # For metadata management
+plotly>=5.17.0
+pypandoc>=1.12  # Universal document converter (requires pandoc)
+python-docx>=0.8.11  # Word document generation
+python-pptx>=0.6.21  # PowerPoint generation
+scikit-learn>=1.3.0
+scipy>=1.10.0
+scipy>=1.10.0     # For advanced processing
+seaborn>=0.12.0
+segmentation-models-pytorch>=0.3.3
+torch>=2.0.0
+torchvision>=0.15.0
+tqdm>=4.65.0
+weasyprint>=60.0  # For PDF conversion
+weasyprint>=60.0  # PDF conversion
