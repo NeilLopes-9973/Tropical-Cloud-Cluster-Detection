@@ -110,11 +110,10 @@ models/
 *.pkl
 *.joblib
 
-# Large directories
+# Large directories (excluding dashboard)
 01_data_preparation/
 02_model_training/
 03_inference/
-04_dashboards/
 05_validation/
 06_research_outputs/
 api/
@@ -124,8 +123,6 @@ scripts/
 validation/
 results_v2/
 cleanup_project.py
-sample_data_generator.py
-setup_project.py
 
 # IDE
 .vscode/
@@ -144,3 +141,6 @@ Thumbs.db
 !.streamlit/
 !README.md
 !DEPLOYMENT_GUIDE.md
+!04_dashboards/
+!sample_data_generator.py
+!setup_project.py
