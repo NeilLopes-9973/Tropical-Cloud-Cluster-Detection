@@ -14,5 +14,10 @@
   ],
   "env": {
     "PYTHON_VERSION": "3.11"
+  },
+  "build": {
+    "env": {
+      "PYTHONPATH": "$PYTHONPATH:/opt/render/project/src/"
+    }
   }
 }
