@@ -1,4 +1,4 @@
-﻿"""
+"""
 Original ITCC Dashboard with Animation Features
 INSAT-3D Tropical Cloud Cluster Tracking - Dark Theme with Time-lapse Animation
 
@@ -20,6 +20,13 @@ from pathlib import Path
 # ============================================================================
 # CONFIGURATION & DARK THEME
 # ============================================================================
+
+# Mobile detection
+is_mobile = st.session_state.get("is_mobile", False)
+
+if st.sidebar.checkbox("📱 Mobile View"):
+    is_mobile = True
+    st.session_state["is_mobile"] = True
 
 st.set_page_config(
     page_title="ITCC Dashboard - Animation",
@@ -54,14 +61,20 @@ header {visibility: hidden;}
 }
 
 .block-container {
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 1rem;
     max-width: 100% !important;
     width: 100% !important;
 }
 
+@media (max-width: 768px) {
+    .block-container {
+        padding: 0.5rem !important;
+    }
+}
+
 /* Headers */
 .main-header {
-    font-size: 2.8rem;
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
     margin-bottom: 1rem;
@@ -71,12 +84,24 @@ header {visibility: hidden;}
     background-clip: text;
 }
 
+@media (max-width: 768px) {
+    .main-header {
+        font-size: 1.5rem !important;
+    }
+}
+
 .subtitle {
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: #64b5f6;
     text-align: center;
     margin-bottom: 2rem;
     font-weight: 300;
+}
+
+@media (max-width: 768px) {
+    .subtitle {
+        font-size: 0.85rem !important;
+    }
 }
 
 /* Metrics */
@@ -333,7 +358,7 @@ def create_animated_map(df):
                     north=indian_ocean_bounds["lat_max"]
                 )
             ),
-            height=650,
+            height = 300 if is_mobile else 450,
             autosize=True,
             margin=dict(l=0, r=0, t=28, b=0),
             paper_bgcolor="rgba(0,0,0,0)",
@@ -404,7 +429,7 @@ def create_animated_map(df):
         size_max=24,
         zoom=3.7,
         center=dict(lat=5, lon=75),
-        height=650,
+        height = 300 if is_mobile else 450,
         hover_data=hover_cols
     )
 
@@ -430,7 +455,7 @@ def create_animated_map(df):
             x=0.02,
             font=dict(color="#E3F2FD", size=20)
         ),
-        height=650,
+        height = 300 if is_mobile else 450,
         autosize=True,
         margin=dict(l=0, r=0, t=44, b=0),
         paper_bgcolor="rgba(0,0,0,0)",
@@ -504,7 +529,7 @@ def create_animated_trajectory_map(df_track):
                     north=indian_ocean_bounds["lat_max"]
                 )
             ),
-            height=650,
+            height = 300 if is_mobile else 450,
             autosize=True,
             margin=dict(l=0, r=0, t=44, b=0),
             paper_bgcolor="rgba(0,0,0,0)",
@@ -656,7 +681,7 @@ def create_animated_trajectory_map(df_track):
             x=0.02,
             font=dict(color="#E3F2FD", size=20)
         ),
-        height=650,
+        height = 300 if is_mobile else 450,
         autosize=True,
         margin=dict(l=0, r=0, t=44, b=0),
         paper_bgcolor="rgba(0,0,0,0)",
@@ -758,7 +783,7 @@ def create_dual_axis_track_evolution(df_track):
     )
 
     fig.update_layout(
-        height=500,
+        height = 280 if is_mobile else 350,
         plot_bgcolor="#0a0e27",
         paper_bgcolor="#0a0e27",
         font=dict(color="#E0E0E0"),
@@ -830,7 +855,7 @@ def create_time_series(df_track):
     )
     
     fig.update_layout(
-        height=600,
+        height = 280 if is_mobile else 350,
         showlegend=False,
         plot_bgcolor='rgba(13, 27, 42, 0.8)',
         paper_bgcolor='rgba(13, 27, 42, 0.8)',
@@ -864,7 +889,8 @@ with st.expander("📊 Dataset Information", expanded=False):
         available_dates = sorted(df['timestamp'].dt.date.unique())
         observation_dates = f"{len(available_dates)} dates available"
         
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2 = st.columns(2)
+        col3, col4 = st.columns(2)
         with col1:
             st.metric("📋 Total Records", f"{total_records:,}")
         with col2:
@@ -1000,7 +1026,8 @@ if "Track_ID" in df.columns:
                 df_track_sorted = df_track_sorted.dropna(subset=["timestamp"]).sort_values("timestamp")
 
             st.header("📊 Track Metrics")
-            m1, m2, m3, m4 = st.columns(4)
+            col1, col2 = st.columns(2)
+            col3, col4 = st.columns(2)
 
             duration_label = "N/A"
             if "timestamp" in df_track_sorted.columns and len(df_track_sorted) >= 2:
@@ -1021,13 +1048,13 @@ if "Track_ID" in df.columns:
             elif "Tb_min" in df_track_sorted.columns and len(df_track_sorted) > 0:
                 mean_tb_label = f"{float(pd.to_numeric(df_track_sorted['Tb_min'], errors='coerce').mean()):.1f}"
 
-            with m1:
+            with col1:
                 st.metric("Duration", duration_label)
-            with m2:
+            with col2:
                 st.metric("Max Area (km²)", max_area_label)
-            with m3:
+            with col3:
                 st.metric("Min Tb (K)", min_tb_label)
-            with m4:
+            with col4:
                 st.metric("Mean Tb (K)", mean_tb_label)
 
             st.header("📈 Track Evolution (Dual Axis)")
@@ -1064,7 +1091,7 @@ if "Track_ID" in df.columns:
                     plot_bgcolor="#0a0e27",
                     paper_bgcolor="#0a0e27",
                     font=dict(color="#90caf9"),
-                    height=350,
+                    height = 280 if is_mobile else 350,
                     xaxis_title="Lifecycle Stage",
                     yaxis_title="Count",
                 )
