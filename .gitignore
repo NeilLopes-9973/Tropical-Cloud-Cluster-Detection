@@ -46,6 +46,10 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
+# Runtime logs
+logs/
+*.log
+
 # Jupyter Notebook
 .ipynb_checkpoints
 

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Original ITCC Dashboard with Animation Features
 INSAT-3D Tropical Cloud Cluster Tracking - Dark Theme with Time-lapse Animation
 
@@ -28,138 +28,205 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Dark Theme CSS
+# Dark Theme CSS - Target Streamlit Root Elements
 st.markdown("""
 <style>
-    .main-header {
-        font-size: 2.8rem;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 1rem;
-        background: linear-gradient(90deg, #1a237e 0%, #0d47a1 50%, #01579b 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    .subtitle {
-        font-size: 1.3rem;
-        color: #64b5f6;
-        text-align: center;
-        margin-bottom: 2rem;
-        font-weight: 300;
-    }
-    
-    .main {
-        background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
-    }
-    
-    .stMetric {
-        background-color: rgba(13, 27, 42, 0.9);
-        border: 1px solid rgba(100, 181, 246, 0.3);
-        border-radius: 12px;
-        padding: 18px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-    }
-    
-    .stMetric:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(100, 181, 246, 0.2);
-    }
-    
-    .stMetric label {
-        color: #64b5f6 !important;
-        font-weight: 600;
-        font-size: 0.9rem;
-    }
-    
-    h1, h2, h3, h4 {
-        color: #90caf9 !important;
-        font-weight: 600;
-    }
-    
-    .stDataFrame {
-        background-color: rgba(13, 27, 42, 0.7);
-        border: 1px solid rgba(100, 181, 246, 0.2);
-        border-radius: 8px;
-    }
-    
-    /* Dark theme for plots */
-    .js-plotly-plot .plotly {
-        background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%) !important;
-    }
-    
-    .stSelectbox > div > div > select,
-    .stSlider > div > div > div,
-    .stDateInput > div > div > input {
-        background-color: rgba(13, 27, 42, 0.8);
-        color: #90caf9;
-        border: 1px solid rgba(100, 181, 246, 0.3);
-    }
-    
-    .stButton > button {
-        background: linear-gradient(90deg, #1565c0 0%, #0d47a1 100%);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        padding: 0.5rem 1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    
-    .stButton > button:hover {
-        background: linear-gradient(90deg, #1976d2 0%, #1565c0 100%);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
-    }
-    
-    .animation-controls {
-        background: rgba(13, 27, 42, 0.9);
-        border: 1px solid rgba(100, 181, 246, 0.3);
-        border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    
-    .dark-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: rgba(13, 27, 42, 0.95);
-        color: #64b5f6;
-        text-align: center;
-        padding: 12px;
-        border-top: 2px solid rgba(100, 181, 246, 0.3);
-        font-size: 13px;
-        backdrop-filter: blur(10px);
-    }
-    
-    .status-indicator {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-right: 8px;
-        animation: pulse 2s infinite;
-    }
-    
-    .status-playing {
-        background-color: #4caf50;
-    }
-    
-    .status-paused {
-        background-color: #ff9800;
-    }
-    
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.5; }
-        100% { opacity: 1; }
-    }
+/* Target Streamlit root elements */
+html, body {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
+    color: #90caf9;
+}
+
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
+    padding: 0;
+}
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    border-right: 1px solid rgba(100, 181, 246, 0.2);
+}
+
+header {visibility: hidden;}
+.stApp {margin-top: -50px;}
+[data-testid="stHeader"] {
+    background: transparent !important;
+}
+
+.block-container {
+    padding: 1rem 2rem 2rem 2rem;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Headers */
+.main-header {
+    font-size: 2.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #1a237e 0%, #0d47a1 50%, #01579b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: #64b5f6;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+/* Metrics */
+.stMetric {
+    background-color: rgba(13, 27, 42, 0.9) !important;
+    border: 1px solid rgba(100, 181, 246, 0.3);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.stMetric:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(100, 181, 246, 0.2);
+}
+
+.stMetric label {
+    color: #64b5f6 !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Text elements */
+h1, h2, h3, h4, h5, h6 {
+    color: #90caf9 !important;
+    font-weight: 600;
+}
+
+p, span, div {
+    color: #b0bec5 !important;
+}
+
+/* DataFrames */
+.stDataFrame {
+    background-color: rgba(13, 27, 42, 0.7) !important;
+    border: 1px solid rgba(100, 181, 246, 0.2);
+    border-radius: 8px;
+}
+
+/* Plotly dark theme */
+.js-plotly-plot .plotly {
+    background: transparent !important;
+}
+
+.plotly .plot-container {
+    background: transparent !important;
+}
+
+/* Form elements */
+.stSelectbox > div > div > select,
+.stSlider > div > div > div,
+.stDateInput > div > div > input,
+.stTextInput > div > div > input {
+    background-color: rgba(13, 27, 42, 0.8) !important;
+    color: #90caf9 !important;
+    border: 1px solid rgba(100, 181, 246, 0.3);
+}
+
+/* Buttons */
+.stButton > button {
+    background: linear-gradient(90deg, #1565c0 0%, #0d47a1 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.stButton > button:hover {
+    background: linear-gradient(90deg, #1976d2 0%, #1565c0 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background-color: rgba(13, 27, 42, 0.8) !important;
+    border: 1px solid rgba(100, 181, 246, 0.3);
+}
+
+.streamlit-expanderContent {
+    background-color: rgba(13, 27, 42, 0.6) !important;
+}
+
+/* Animation controls */
+.animation-controls {
+    background: rgba(13, 27, 42, 0.9);
+    border: 1px solid rgba(100, 181, 246, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+.dark-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(13, 27, 42, 0.95);
+    color: #64b5f6;
+    text-align: center;
+    padding: 12px;
+    border-top: 2px solid rgba(100, 181, 246, 0.3);
+    font-size: 13px;
+    backdrop-filter: blur(10px);
+}
+
+/* Status indicators */
+.status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+.status-playing {
+    background-color: #4caf50;
+}
+
+.status-paused {
+    background-color: #ff9800;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Remove white backgrounds */
+element.style {
+    background-color: transparent !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# Force full width for main section
+st.markdown("""
+<style>
+section.main > div {
+    max-width: 100% !important;
+    width: 100% !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -245,100 +312,472 @@ def generate_animated_sample_data():
                 'frame_index': i,
                 'sequence_id': track_id
             })
-    
+
     return pd.DataFrame(tracks)
 
-# ============================================================================
-# ANIMATION FUNCTIONS
-# ============================================================================
+def create_animated_map(df):
+    """Create presentation-ready animated cloud visualization over the Indian Ocean."""
+    indian_ocean_bounds = dict(lat_min=-30, lat_max=30, lon_min=30, lon_max=110)
 
-def create_animated_map(df, animation_frame_col='frame_index'):
-    """Create animated map with play/pause controls"""
-    if len(df) == 0:
-        return go.Figure()
-    
-    # Color based on temperature (dark theme)
-    df['color'] = df['Tb_min'].apply(
-        lambda x: '#ffffff' if x < 200 else '#b3e5fc' if x < 220 else '#4fc3f7'
-    )
-    
-    # Size based on area
-    df['size'] = np.clip(df['Area_km2'] / 80, 8, 40)
-    
+    def empty_map(message):
+        fig = go.Figure()
+        fig.update_layout(
+            mapbox=dict(
+                style="carto-darkmatter",
+                center=dict(lat=5, lon=75),
+                zoom=3.7,
+                bounds=dict(
+                    west=indian_ocean_bounds["lon_min"],
+                    east=indian_ocean_bounds["lon_max"],
+                    south=indian_ocean_bounds["lat_min"],
+                    north=indian_ocean_bounds["lat_max"]
+                )
+            ),
+            height=650,
+            autosize=True,
+            margin=dict(l=0, r=0, t=28, b=0),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#E3F2FD", size=13),
+            annotations=[dict(
+                text=message,
+                x=0.5,
+                y=0.5,
+                xref="paper",
+                yref="paper",
+                showarrow=False,
+                font=dict(color="#E3F2FD", size=18)
+            )]
+        )
+        return fig
+
+    if df is None or len(df) == 0:
+        return empty_map("No cloud clusters available")
+
+    required_cols = ["Lat", "Lon"]
+    missing_cols = [col for col in required_cols if col not in df.columns]
+    if missing_cols:
+        return empty_map("Latitude/Longitude columns missing")
+
+    df = df.copy()
+    df["Lat"] = pd.to_numeric(df["Lat"], errors="coerce")
+    df["Lon"] = pd.to_numeric(df["Lon"], errors="coerce")
+    df = df.dropna(subset=["Lat", "Lon"])
+
+    df = df[
+        (df["Lat"].between(indian_ocean_bounds["lat_min"], indian_ocean_bounds["lat_max"])) &
+        (df["Lon"].between(indian_ocean_bounds["lon_min"], indian_ocean_bounds["lon_max"]))
+    ].copy()
+
+    if df.empty:
+        return empty_map("No valid Indian Ocean points")
+
+    time_col = "timestamp" if "timestamp" in df.columns else None
+    if time_col:
+        df[time_col] = pd.to_datetime(df[time_col], errors="coerce")
+        df = df.dropna(subset=[time_col]).sort_values(time_col)
+        df["time_str"] = df[time_col].dt.strftime("%Y-%m-%d %H:%M")
+    else:
+        df["time_str"] = "Current"
+
+    if df.empty:
+        return empty_map("No valid animation frames")
+
+    if "Area_km2" not in df.columns:
+        df["Area_km2"] = 4000
+    df["Area_km2"] = pd.to_numeric(df["Area_km2"], errors="coerce").fillna(4000).clip(lower=500)
+
+    if "Tb_min" not in df.columns:
+        df["Tb_min"] = 220
+    df["Tb_min"] = pd.to_numeric(df["Tb_min"], errors="coerce").fillna(220)
+
+    hover_cols = [col for col in ["Track_ID", "Lifecycle_Stage", "Area_km2", "Tb_min", "Lat", "Lon"] if col in df.columns]
+
     fig = px.scatter_mapbox(
         df,
-        lat='Lat',
-        lon='Lon',
-        color='color',
-        size='size',
-        animation_frame=animation_frame_col,
-        hover_data=['Track_ID', 'Tb_min', 'Area_km2', 'CTH_max_km', 'Lifecycle_Stage'],
-        zoom=4,
-        center={'lat': 12.5, 'lon': 75},
-        mapbox_style='carto-darkmatter',
-        title='🌊 Animated Cloud Cluster Movement - Indian Ocean',
-        color_discrete_map={
-            '#ffffff': 'Coldest',
-            '#b3e5fc': 'Medium', 
-            '#4fc3f7': 'Warm'
-        }
-    )
-    
-    # Animation settings
-    fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 800
-    fig.layout.updatemenus[0].buttons[0].args[1]['frame']['redraw'] = True
-    fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 300
-    
-    fig.update_layout(
+        lat="Lat",
+        lon="Lon",
+        color="Tb_min",
+        size="Area_km2",
+        animation_frame="time_str",
+        color_continuous_scale=["#E3F2FD", "#4FC3F7", "#0288D1", "#01579B"],
+        size_max=24,
+        zoom=3.7,
+        center=dict(lat=5, lon=75),
         height=650,
-        margin={"r": 0, "t": 50, "l": 0, "b": 0},
-        showlegend=True,
-        font=dict(color='#90caf9', size=12),
-        legend=dict(
-            bgcolor='rgba(13, 27, 42, 0.8)',
-            bordercolor='rgba(100, 181, 246, 0.3)',
-            borderwidth=1
-        ),
-        updatemenus=[
-            dict(
-                type="buttons",
-                direction="left",
-                pad={"r": 10, "t": 87},
-                showactive=False,
-                x=0.011,
-                xanchor="left",
-                y=0,
-                yanchor="top",
-                buttons=[
-                    dict(
-                        label="▶️ Play",
-                        method="animate",
-                        args=[None, {"frame": {"duration": 800, "redraw": True},
-                                     "fromcurrent": True, "transition": {"duration": 300}}]
-                    ),
-                    dict(
-                        label="⏸️ Pause", 
-                        method="animate",
-                        args=[[None], {"frame": {"duration": 0, "redraw": False},
-                                       "mode": "immediate", "transition": {"duration": 0}}]
-                    )
-                ]
+        hover_data=hover_cols
+    )
+
+    fig.update_traces(
+        marker=dict(opacity=0.82, sizemin=5),
+        selector=dict(type="scattermapbox")
+    )
+
+    fig.update_layout(
+        mapbox=dict(
+            style="carto-darkmatter",
+            center=dict(lat=5, lon=75),
+            zoom=3.7,
+            bounds=dict(
+                west=indian_ocean_bounds["lon_min"],
+                east=indian_ocean_bounds["lon_max"],
+                south=indian_ocean_bounds["lat_min"],
+                north=indian_ocean_bounds["lat_max"]
             )
+        ),
+        title=dict(
+            text="Indian Ocean Cloud Cluster Animation",
+            x=0.02,
+            font=dict(color="#E3F2FD", size=20)
+        ),
+        height=650,
+        autosize=True,
+        margin=dict(l=0, r=0, t=44, b=0),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#E3F2FD", size=13),
+        legend=dict(
+            title="",
+            bgcolor="rgba(5, 12, 24, 0.72)",
+            bordercolor="rgba(227, 242, 253, 0.22)",
+            borderwidth=1,
+            font=dict(color="#E3F2FD")
+        ),
+        coloraxis_colorbar=dict(
+            title=dict(text="Min Tb (K)", font=dict(color="#E3F2FD")),
+            thickness=14,
+            len=0.72,
+            bgcolor="rgba(5, 12, 24, 0.72)",
+            tickfont=dict(color="#E3F2FD")
+        )
+    )
+
+    fig.update_layout(
+        updatemenus=[dict(
+            type="buttons",
+            direction="left",
+            active=-1,
+            x=0.02,
+            y=0.02,
+            xanchor="left",
+            yanchor="bottom",
+            bgcolor="#1565c0",
+            bordercolor="#00e5ff",
+            font=dict(color="#ffffff"),
+            buttons=[
+                dict(
+                    label="▶ Play",
+                    method="animate",
+                    args=[None, dict(frame=dict(duration=300, redraw=True), transition=dict(duration=100), fromcurrent=True)]
+                ),
+                dict(
+                    label="⏸ Pause",
+                    method="animate",
+                    args=[[None], dict(frame=dict(duration=0, redraw=False), mode="immediate")]
+                )
+            ]
+        )],
+        hoverlabel=dict(
+            bgcolor="#0a0e27",
+            font_size=12,
+            font_family="Arial"
+        )
+    )
+
+    return fig
+
+def create_animated_trajectory_map(df_track):
+    """Create animated cumulative trajectory for the selected filtered track."""
+    indian_ocean_bounds = dict(lat_min=-30, lat_max=30, lon_min=30, lon_max=110)
+
+    def empty_map(message):
+        fig = go.Figure()
+        fig.update_layout(
+            mapbox=dict(
+                style="carto-darkmatter",
+                center=dict(lat=5, lon=75),
+                zoom=3.8,
+                bounds=dict(
+                    west=indian_ocean_bounds["lon_min"],
+                    east=indian_ocean_bounds["lon_max"],
+                    south=indian_ocean_bounds["lat_min"],
+                    north=indian_ocean_bounds["lat_max"]
+                )
+            ),
+            height=650,
+            autosize=True,
+            margin=dict(l=0, r=0, t=44, b=0),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#E3F2FD", size=13),
+            annotations=[dict(
+                text=message,
+                x=0.5,
+                y=0.5,
+                xref="paper",
+                yref="paper",
+                showarrow=False,
+                font=dict(color="#E3F2FD", size=18)
+            )]
+        )
+        return fig
+
+    if df_track is None or len(df_track) == 0:
+        return empty_map("No trajectory data available")
+
+    required_cols = ["Lat", "Lon"]
+    missing_cols = [col for col in required_cols if col not in df_track.columns]
+    if missing_cols:
+        return empty_map("Latitude/Longitude columns missing")
+
+    df_track = df_track.copy()
+    df_track["Lat"] = pd.to_numeric(df_track["Lat"], errors="coerce")
+    df_track["Lon"] = pd.to_numeric(df_track["Lon"], errors="coerce")
+    df_track = df_track.dropna(subset=["Lat", "Lon"])
+
+    df_track = df_track[
+        (df_track["Lat"].between(indian_ocean_bounds["lat_min"], indian_ocean_bounds["lat_max"])) &
+        (df_track["Lon"].between(indian_ocean_bounds["lon_min"], indian_ocean_bounds["lon_max"]))
+    ].copy()
+
+    if df_track.empty:
+        return empty_map("No valid Indian Ocean trajectory points")
+
+    if "timestamp" in df_track.columns:
+        df_track["timestamp"] = pd.to_datetime(df_track["timestamp"], errors="coerce")
+        df_track = df_track.dropna(subset=["timestamp"]).sort_values("timestamp")
+        df_track["time_label"] = df_track["timestamp"].dt.strftime("%Y-%m-%d %H:%M")
+    elif "Time_UTC" in df_track.columns:
+        df_track["Time_UTC"] = pd.to_datetime(df_track["Time_UTC"], errors="coerce")
+        df_track = df_track.dropna(subset=["Time_UTC"]).sort_values("Time_UTC")
+        df_track["time_label"] = df_track["Time_UTC"].dt.strftime("%Y-%m-%d %H:%M")
+    else:
+        df_track = df_track.reset_index(drop=True)
+        df_track["time_label"] = "Step " + (df_track.index + 1).astype(str)
+
+    df_track = df_track.reset_index(drop=True)
+    df_track["step"] = np.arange(len(df_track))
+
+    if df_track.empty:
+        return empty_map("No valid trajectory frames")
+
+    if len(df_track) <= 1:
+        return empty_map("No trajectory data available")
+
+    lat_min = df_track["Lat"].min()
+    lat_max = df_track["Lat"].max()
+    lon_min = df_track["Lon"].min()
+    lon_max = df_track["Lon"].max()
+
+    center_lat = df_track["Lat"].mean()
+    center_lon = df_track["Lon"].mean()
+
+    max_range = max(lat_max - lat_min, lon_max - lon_min)
+    if max_range < 2:
+        zoom = 6
+    elif max_range < 5:
+        zoom = 5
+    else:
+        zoom = 4
+
+    def cumulative_trace(frame_index):
+        frame_data = df_track.iloc[:frame_index]
+        return go.Scattermapbox(
+            lat=frame_data["Lat"],
+            lon=frame_data["Lon"],
+            mode="lines+markers",
+            line=dict(color="cyan", width=4),
+            marker=dict(size=7, color="white"),
+            name="Trajectory Path",
+            customdata=np.stack([frame_data["time_label"]], axis=-1),
+            hovertemplate="Time: %{customdata[0]}<br>Lat: %{lat:.2f}<br>Lon: %{lon:.2f}<extra></extra>"
+        )
+
+    start_point = df_track.iloc[0]
+    end_point = df_track.iloc[-1]
+
+    fig = go.Figure(
+        data=[
+            go.Scattermapbox(
+                lat=[],
+                lon=[],
+                mode="lines+markers",
+                line=dict(color="cyan", width=4),
+                marker=dict(size=7, color="white"),
+                name="Trajectory Path",
+                hovertemplate="Time: %{customdata[0]}<br>Lat: %{lat:.2f}<br>Lon: %{lon:.2f}<extra></extra>"
+            )
+        ],
+        frames=[
+            go.Frame(
+                data=[cumulative_trace(i)],
+                traces=[0],
+                name=str(i)
+            )
+            for i in range(1, len(df_track) + 1)
         ]
     )
-    
-    # Update hover template
-    fig.update_traces(
-        hovertemplate='<b>Track %{customdata[0]}</b><br>' +
-                     'Lat: %{lat:.2f}°<br>' +
-                     'Lon: %{lon:.2f}°<br>' +
-                     'Tb_min: %{customdata[1]:.1f} K<br>' +
-                     'Area: %{customdata[2]:.0f} km²<br>' +
-                     'CTH: %{customdata[3]:.1f} km<br>' +
-                     'Stage: %{customdata[4]}<extra></extra>',
-        customdata=df[['Track_ID', 'Tb_min', 'Area_km2', 'CTH_max_km', 'Lifecycle_Stage']]
+
+    fig.add_trace(go.Scattermapbox(
+        lat=[start_point["Lat"]],
+        lon=[start_point["Lon"]],
+        mode="markers",
+        marker=dict(size=16, color="#00E676"),
+        name="Start",
+        hovertemplate="Start<br>Lat: %{lat:.2f}<br>Lon: %{lon:.2f}<extra></extra>"
+    ))
+
+    fig.add_trace(go.Scattermapbox(
+        lat=[end_point["Lat"]],
+        lon=[end_point["Lon"]],
+        mode="markers",
+        marker=dict(size=16, color="#FF1744"),
+        name="End",
+        hovertemplate="End<br>Lat: %{lat:.2f}<br>Lon: %{lon:.2f}<extra></extra>"
+    ))
+
+    slider_steps = [
+        dict(
+            method="animate",
+            label=str(i),
+            args=[[str(i)], dict(mode="immediate", frame=dict(duration=300, redraw=True), transition=dict(duration=100))]
+        )
+        for i in range(1, len(df_track) + 1)
+    ]
+
+    fig.update_layout(
+        mapbox=dict(
+            style="carto-darkmatter",
+            center=dict(lat=center_lat, lon=center_lon),
+            zoom=zoom
+        ),
+        title=dict(
+            text="Track Trajectory - Full Lifecycle",
+            x=0.02,
+            font=dict(color="#E3F2FD", size=20)
+        ),
+        height=650,
+        autosize=True,
+        margin=dict(l=0, r=0, t=44, b=0),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#E3F2FD", size=13),
+        legend=dict(
+            orientation="h",
+            yanchor="top",
+            y=0.98,
+            xanchor="left",
+            x=0.02,
+            bgcolor="rgba(5, 12, 24, 0.72)",
+            bordercolor="rgba(227, 242, 253, 0.22)",
+            borderwidth=1,
+            font=dict(color="#E3F2FD")
+        ),
+        updatemenus=[{
+            "type": "buttons",
+            "direction": "left",
+            "active": -1,
+            "x": 0.02,
+            "y": 0.02,
+            "xanchor": "left",
+            "yanchor": "bottom",
+            "bgcolor": "#1565c0",
+            "bordercolor": "#00e5ff",
+            "font": {"color": "#ffffff"},
+            "buttons": [
+                {
+                    "label": "▶ Play",
+                    "method": "animate",
+                    "args": [None, {"frame": {"duration": 300, "redraw": True}, "transition": {"duration": 100}, "fromcurrent": True}]
+                },
+                {
+                    "label": "⏸ Pause",
+                    "method": "animate",
+                    "args": [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}]
+                }
+            ]
+        }],
+        sliders=[dict(
+            active=0,
+            x=0.15,
+            y=0.035,
+            len=0.80,
+            xanchor="left",
+            yanchor="bottom",
+            bgcolor="rgba(5, 12, 24, 0.72)",
+            bordercolor="rgba(227, 242, 253, 0.22)",
+            borderwidth=1,
+            currentvalue=dict(prefix="Step: ", font=dict(color="#E3F2FD", size=13)),
+            steps=slider_steps
+        )],
+        hoverlabel=dict(
+            bgcolor="#0a0e27",
+            font_size=12,
+            font_family="Arial"
+        )
     )
-    
+
+    return fig
+
+def create_dual_axis_track_evolution(df_track):
+    df_track = df_track.copy()
+    df_track["timestamp"] = pd.to_datetime(df_track["timestamp"], errors="coerce")
+    df_track["Area_km2"] = pd.to_numeric(df_track["Area_km2"], errors="coerce")
+    df_track["Tb_min"] = pd.to_numeric(df_track["Tb_min"], errors="coerce")
+    df_track = df_track.dropna(subset=["timestamp", "Area_km2", "Tb_min"]).sort_values("timestamp")
+
+    # Remove duplicate timestamps (fix vertical lines) without aggregating non-numeric columns
+    df_track = df_track.groupby("timestamp", as_index=False).agg({"Area_km2": "mean", "Tb_min": "mean"})
+
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    fig.add_trace(
+        go.Scatter(
+            x=df_track["timestamp"],
+            y=df_track["Area_km2"],
+            mode="lines+markers",
+            line=dict(color="#00BCD4", width=3),
+            marker=dict(size=6),
+            name="Area (km²)",
+            hovertemplate="Time: %{x|%d %B %Y %H:%M}<br>Area: %{y:.0f} km²<extra></extra>",
+        ),
+        secondary_y=False,
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=df_track["timestamp"],
+            y=df_track["Tb_min"],
+            mode="lines+markers",
+            line=dict(color="#F44336", width=2),
+            marker=dict(size=5),
+            name="Tb_min (K)",
+            hovertemplate="Time: %{x|%d %B %Y %H:%M}<br>Tb_min: %{y:.1f} K<extra></extra>",
+        ),
+        secondary_y=True,
+    )
+
+    fig.update_layout(
+        height=500,
+        plot_bgcolor="#0a0e27",
+        paper_bgcolor="#0a0e27",
+        font=dict(color="#E0E0E0"),
+        legend=dict(bgcolor="rgba(0,0,0,0)", orientation="h", y=1.05),
+        margin=dict(l=40, r=40, t=40, b=40),
+    )
+
+    fig.update_xaxes(title="Date", tickformat="%d %b %Y", showgrid=False)
+    fig.update_yaxes(
+        title_text="Area (km²)",
+        color="#00BCD4",
+        secondary_y=False,
+        showgrid=True,
+        gridcolor="rgba(255,255,255,0.08)",
+        dtick=5000,
+    )
+    fig.update_yaxes(title_text="Tb_min (K)", color="#F44336", secondary_y=True)
+    fig.update_yaxes(secondary_y=True, showgrid=False)
+
     return fig
 
 def create_time_series(df_track):
@@ -365,8 +804,8 @@ def create_time_series(df_track):
                 showscale=False,
                 colorbar=dict(title="Frame", x=1.02)
             ),
-            name='Area (km²)',
-            hovertemplate='Time: %{x}<br>Area: %{y:.0f} km²<br>Frame: %{marker.color}<extra></extra>'
+            name='Area (km2)',
+            hovertemplate='Date: %{x|%d %B %Y}<br>Time: %{x|%H:%M} UTC<br>Area: %{y:.0f} km2<extra></extra>'
         ),
         row=1, col=1
     )
@@ -385,7 +824,7 @@ def create_time_series(df_track):
                 showscale=False
             ),
             name='Tb_min (K)',
-            hovertemplate='Time: %{x}<br>Tb_min: %{y:.1f} K<br>Frame: %{marker.color}<extra></extra>'
+            hovertemplate='Date: %{x|%d %B %Y}<br>Time: %{x|%H:%M} UTC<br>Tb_min: %{y:.1f} K<extra></extra>'
         ),
         row=2, col=1
     )
@@ -399,7 +838,7 @@ def create_time_series(df_track):
     )
     
     fig.update_xaxes(title_text="Time (UTC)", row=2, col=1)
-    fig.update_yaxes(title_text="Area (km²)", row=1, col=1)
+    fig.update_yaxes(title_text="Area (km2)", row=1, col=1)
     fig.update_yaxes(title_text="Temperature (K)", row=2, col=1)
     
     return fig
@@ -416,55 +855,55 @@ with st.spinner("🌊 Loading ITCC dataset with animation support..."):
 st.markdown('<div class="main-header">🌊 ITCC Animated Dashboard</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">INSAT-3D Tropical Cloud Cluster Tracking - Time-lapse Animation</div>', unsafe_allow_html=True)
 
-# Animation controls in sidebar
-st.sidebar.header("🎬 Animation Controls")
-
-# Animation mode toggle
-animation_mode = st.sidebar.checkbox("🎥 Enable Animation Mode", value=True)
-
-if animation_mode:
-    st.sidebar.markdown('<div class="animation-controls">', unsafe_allow_html=True)
-    
-    # Animation speed control
-    animation_speed = st.sidebar.slider(
-        "⚡ Animation Speed",
-        min_value=200,
-        max_value=2000,
-        value=800,
-        step=100,
-        help="Frame duration in milliseconds"
-    )
-    
-    # Auto-play option
-    auto_play = st.sidebar.checkbox("🔄 Auto-play on load")
-    
-    st.sidebar.markdown('</div>', unsafe_allow_html=True)
-
-st.sidebar.markdown("---")
+# Dataset Information Section
+with st.expander("📊 Dataset Information", expanded=False):
+    if 'timestamp' in df.columns:
+        total_records = len(df)
+        date_range = f"{df['timestamp'].min().strftime('%Y-%m-%d')} to {df['timestamp'].max().strftime('%Y-%m-%d')}"
+        unique_tracks = df['Track_ID'].nunique() if 'Track_ID' in df.columns else 'N/A'
+        available_dates = sorted(df['timestamp'].dt.date.unique())
+        observation_dates = f"{len(available_dates)} dates available"
+        
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("📋 Total Records", f"{total_records:,}")
+        with col2:
+            st.metric("📅 Date Range", date_range)
+        with col3:
+            st.metric("🛰️ Unique Tracks", f"{unique_tracks:,}")
+        with col4:
+            st.metric("📆 Observation Dates", observation_dates)
+        
+        st.info(f"📈 **Dataset Overview**: ITCC_v2_cleaned.csv with comprehensive meteorological data including Track_ID, Time_UTC, Area_km2, Tb_min, Tb_mean, CTH_mean_km, coordinates, velocity components, and lifecycle stages.")
 
 # Standard filters
 st.sidebar.header("🔍 Cloud Filters")
 
 # Date filter
 if 'timestamp' in df.columns:
-    min_date = df['timestamp'].min().date()
-    max_date = df['timestamp'].max().date()
+    df["date"] = df["timestamp"].dt.date
+    df["time_str"] = df["timestamp"].dt.strftime("%H:%M")
+    available_dates = sorted(df["date"].dropna().unique())
     
-    selected_date = st.sidebar.date_input(
-        "📅 Select Date",
-        value=min_date,
-        min_value=min_date,
-        max_value=max_date
+    selected_date = st.sidebar.selectbox(
+        "Select Date",
+        available_dates,
+        format_func=lambda d: d.strftime("%d %B %Y")
     )
     
-    # Hour filter
-    available_hours = sorted(df['timestamp'].dt.hour.unique())
-    selected_hour = st.sidebar.selectbox("⏰ Select Hour (UTC)", available_hours)
-    
-    # Filter by date and hour
+    # Time filter
+    available_times = sorted(
+        df.loc[df["date"] == selected_date, "time_str"].dropna().unique(),
+        key=lambda x: pd.to_datetime(x, format="%H:%M")
+    )
+    selected_time = st.sidebar.selectbox(
+        "Select Time",
+        available_times
+    )
+    # Filter by date and exact satellite capture time
     df_filtered = df[
-        (df['timestamp'].dt.date == selected_date) &
-        (df['timestamp'].dt.hour == selected_hour)
+        (df["date"] == selected_date) &
+        (df["time_str"] == selected_time)
     ].copy()
 else:
     df_filtered = df.copy()
@@ -492,136 +931,148 @@ if 'Tb_min' in df_filtered.columns:
         (df_filtered['Tb_min'] <= tb_range[1])
     ]
 
-# Quality filter
-if 'quality_flag' in df_filtered.columns:
-    quality_options = st.sidebar.multiselect(
-        "✅ Quality Flag",
-        options=[0, 1, 2],
-        default=[0],
-        format_func=lambda x: {0: "Good", 1: "Suspect", 2: "Missing"}[x]
+st.header("🌊 Cloud Map")
+df_map = df_filtered
+if "timestamp" in df.columns and "date" in df.columns:
+    # For map animation, use all times for the selected date (otherwise a single selected_time leaves only 1 frame).
+    df_map = df[df["date"] == selected_date].copy()
+    if "Lifecycle_Stage" in df_map.columns and "Lifecycle_Stage" in df_filtered.columns:
+        if "selected_stage" in locals() and selected_stage != "All":
+            df_map = df_map[df_map["Lifecycle_Stage"] == selected_stage]
+    if "Tb_min" in df_map.columns and "Tb_min" in df_filtered.columns:
+        if "tb_range" in locals():
+            df_map = df_map[(df_map["Tb_min"] >= tb_range[0]) & (df_map["Tb_min"] <= tb_range[1])]
+
+if len(df_map) > 0:
+    cloud_fig = create_animated_map(df_map)
+    st.plotly_chart(
+        cloud_fig,
+        use_container_width=True,
+        config={"scrollZoom": True, "displayModeBar": True}
     )
-    
-    if quality_options:
-        df_filtered = df_filtered[df_filtered['quality_flag'].isin(quality_options)]
-
-# Summary metrics with dark theme
-st.header("📊 Ocean Statistics")
-col1, col2, col3, col4 = st.columns(4)
-
-with col1:
-    st.metric("🌊 Total Observations", f"{len(df):,}")
-
-with col2:
-    if 'Track_ID' in df.columns:
-        unique_tracks = df['Track_ID'].nunique()
-        st.metric("🛰️ Unique Tracks", f"{unique_tracks:,}")
-    else:
-        st.metric("🛰️ Unique Tracks", "N/A")
-
-with col3:
-    st.metric("👁️ Currently Displayed", f"{len(df_filtered)}")
-
-with col4:
-    if 'timestamp' in df.columns:
-        duration = (df['timestamp'].max() - df['timestamp'].min()).days
-        st.metric("📅 Dataset Duration", f"{duration} days")
-    else:
-        st.metric("📅 Dataset Duration", "N/A")
-
-# Animation status indicator
-if animation_mode:
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.markdown(f"""
-        <div style="text-align: center; margin: 1rem 0;">
-            <span class="status-indicator status-paused"></span>
-            <span style="color: #90caf9; font-weight: 600;">
-                Animation: Ready | Speed: {animation_speed}ms/frame
-            </span>
-        </div>
-        """, unsafe_allow_html=True)
-
-# Main animated map
-st.header("🗺️ Animated Cloud Movement")
-if len(df_filtered) > 0:
-    if animation_mode:
-        # Create animated version
-        animated_fig = create_animated_map(df_filtered)
-        st.plotly_chart(animated_fig, use_container_width=True)
-        
-        # Animation instructions
-        st.info("🎬 **Animation Controls**: Use the play/pause buttons below the map to control animation. You can also drag the slider to jump to specific frames.")
-    else:
-        # Static version
-        static_fig = create_animated_map(df_filtered, animation_frame_col=None)
-        st.plotly_chart(static_fig, use_container_width=True)
-    
-    # Lifecycle distribution
-    if 'Lifecycle_Stage' in df_filtered.columns:
-        st.subheader("🔄 Lifecycle Distribution")
-        stage_counts = df_filtered['Lifecycle_Stage'].value_counts()
-        cols = st.columns(min(len(stage_counts), 4))
-        
-        for i, (stage, count) in enumerate(stage_counts.items()):
-            if i < len(cols):
-                with cols[i]:
-                    st.metric(stage, int(count))
 else:
-    st.warning("🌊 No cloud clusters match current filters")
+    st.warning("No cloud clusters match the selected filters.")
 
-# Track analysis with animation support
-if 'Track_ID' in df.columns:
-    st.header("🛰️ Track Analysis with Animation")
-    
-    available_tracks = sorted(df['Track_ID'].unique())
-    selected_track = st.selectbox(
-        "Select Track ID for Animation",
-        options=available_tracks,
-        format_func=lambda x: f"Track {x}"
+st.header("🛰️ Trajectory")
+if "Track_ID" in df.columns:
+    # Let the user select a track based on the current filtered snapshot (date+time),
+    # but always render the trajectory using the full lifecycle (unfiltered df).
+    tracks_at_selected_time = (
+        sorted(df_filtered["Track_ID"].dropna().unique()) if (len(df_filtered) > 0 and "Track_ID" in df_filtered.columns) else []
     )
-    
-    if selected_track:
-        df_track = df[df['Track_ID'] == selected_track].copy()
-        
-        if len(df_track) > 0:
-            # Track summary
-            st.subheader(f"📊 Track {selected_track} Summary")
-            col1, col2, col3, col4 = st.columns(4)
-            
-            with col1:
-                if 'timestamp' in df_track.columns:
-                    duration_hours = (df_track['timestamp'].max() - df_track['timestamp'].min()).total_seconds() / 3600
-                    st.metric("⏱️ Duration", f"{duration_hours:.1f} hrs")
-                else:
-                    st.metric("⏱️ Duration", f"{len(df_track)} obs")
-            
-            with col2:
-                st.metric("📏 Max Area", f"{df_track['Area_km2'].max():.0f} km²")
-            
-            with col3:
-                st.metric("🌡️ Min Tb_min", f"{df_track['Tb_min'].min():.1f} K")
-            
-            with col4:
-                st.metric("☁️ Max CTH", f"{df_track['CTH_max_km'].max():.1f} km")
-            
-            # Animated time series
-            st.subheader("📈 Animated Evolution")
-            time_series_fig = create_time_series(df_track)
-            st.plotly_chart(time_series_fig, use_container_width=True)
-            
-            # Track data table with frame info
-            with st.expander("📋 View Track Data (Animation Frames)"):
-                display_cols = ['Time_UTC', 'Lat', 'Lon', 'Area_km2', 'Tb_min', 'Lifecycle_Stage', 'frame_index']
-                available_cols = [col for col in display_cols if col in df_track.columns]
-                st.dataframe(
-                    df_track[available_cols].sort_values('Time_UTC'),
-                    use_container_width=True,
-                    height=300
-                )
+    all_tracks = sorted(df["Track_ID"].dropna().unique())
 
-# Footer with dark theme
-st.markdown("""
-<div class="dark-footer">
-    <strong>🌊 ITCC Animated Dashboard</strong> | INSAT-3D Satellite Data | Time-lapse Animation | Dark Theme Interface
-</div>
-""", unsafe_allow_html=True)
+    if tracks_at_selected_time:
+        selected_track = st.selectbox(
+            "Select Track",
+            tracks_at_selected_time,
+            format_func=lambda x: f"Track {x}"
+        )
+    elif all_tracks:
+        selected_track = st.selectbox(
+            "Select Track",
+            all_tracks,
+            format_func=lambda x: f"Track {x}"
+        )
+    else:
+        selected_track = None
+        st.warning("No tracks available in the dataset.")
+
+    if selected_track is not None:
+        df_track = df[df["Track_ID"] == selected_track].copy()
+        df_track = df_track.dropna(subset=["Lat", "Lon"])
+
+        if len(df_track) <= 1:
+            st.warning("No trajectory data available for the selected track (need at least 2 observations).")
+        else:
+            trajectory_fig = create_animated_trajectory_map(df_track)
+            st.plotly_chart(
+                trajectory_fig,
+                use_container_width=True,
+                config={"scrollZoom": True, "displayModeBar": True}
+            )
+
+            df_track_sorted = df_track.copy()
+            if "timestamp" not in df_track_sorted.columns and "Time_UTC" in df_track_sorted.columns:
+                df_track_sorted["timestamp"] = pd.to_datetime(df_track_sorted["Time_UTC"], errors="coerce")
+            if "timestamp" in df_track_sorted.columns:
+                df_track_sorted["timestamp"] = pd.to_datetime(df_track_sorted["timestamp"], errors="coerce")
+                df_track_sorted = df_track_sorted.dropna(subset=["timestamp"]).sort_values("timestamp")
+
+            st.header("📊 Track Metrics")
+            m1, m2, m3, m4 = st.columns(4)
+
+            duration_label = "N/A"
+            if "timestamp" in df_track_sorted.columns and len(df_track_sorted) >= 2:
+                duration_hours = (df_track_sorted["timestamp"].max() - df_track_sorted["timestamp"].min()).total_seconds() / 3600.0
+                duration_label = f"{duration_hours:.1f} hr"
+
+            max_area_label = "N/A"
+            if "Area_km2" in df_track_sorted.columns and len(df_track_sorted) > 0:
+                max_area_label = f"{float(pd.to_numeric(df_track_sorted['Area_km2'], errors='coerce').max()):,.0f}"
+
+            min_tb_label = "N/A"
+            if "Tb_min" in df_track_sorted.columns and len(df_track_sorted) > 0:
+                min_tb_label = f"{float(pd.to_numeric(df_track_sorted['Tb_min'], errors='coerce').min()):.1f}"
+
+            mean_tb_label = "N/A"
+            if "Tb_mean" in df_track_sorted.columns and len(df_track_sorted) > 0:
+                mean_tb_label = f"{float(pd.to_numeric(df_track_sorted['Tb_mean'], errors='coerce').mean()):.1f}"
+            elif "Tb_min" in df_track_sorted.columns and len(df_track_sorted) > 0:
+                mean_tb_label = f"{float(pd.to_numeric(df_track_sorted['Tb_min'], errors='coerce').mean()):.1f}"
+
+            with m1:
+                st.metric("Duration", duration_label)
+            with m2:
+                st.metric("Max Area (km²)", max_area_label)
+            with m3:
+                st.metric("Min Tb (K)", min_tb_label)
+            with m4:
+                st.metric("Mean Tb (K)", mean_tb_label)
+
+            st.header("📈 Track Evolution (Dual Axis)")
+            if (
+                "timestamp" in df_track_sorted.columns
+                and "Area_km2" in df_track_sorted.columns
+                and "Tb_min" in df_track_sorted.columns
+                and len(df_track_sorted) > 1
+            ):
+                fig = create_dual_axis_track_evolution(df_track_sorted)
+                st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+            else:
+                st.warning("Track evolution unavailable (missing required columns or insufficient points).")
+
+            st.header("🌪 Cloud Lifecycle Classification")
+            stage_col = "Stage" if "Stage" in df_track_sorted.columns else ("Lifecycle_Stage" if "Lifecycle_Stage" in df_track_sorted.columns else None)
+            if stage_col is not None and len(df_track_sorted) > 0:
+                stage_counts = df_track_sorted[stage_col].dropna().value_counts().reset_index()
+                stage_counts.columns = ["Stage", "Count"]
+
+                fig_bar = px.bar(
+                    stage_counts,
+                    x="Stage",
+                    y="Count",
+                    color="Stage",
+                    color_discrete_map={
+                        "Developing": "green",
+                        "Mature": "orange",
+                        "Dissipating": "purple",
+                    },
+                )
+                fig_bar.update_layout(
+                    template="plotly_dark",
+                    plot_bgcolor="#0a0e27",
+                    paper_bgcolor="#0a0e27",
+                    font=dict(color="#90caf9"),
+                    height=350,
+                    xaxis_title="Lifecycle Stage",
+                    yaxis_title="Count",
+                )
+                fig_bar.update_xaxes(tickangle=45)
+                st.plotly_chart(fig_bar, use_container_width=True, config={"displayModeBar": False})
+            else:
+                st.warning("Lifecycle distribution unavailable (missing Stage/Lifecycle_Stage column).")
+else:
+    st.warning("No tracks available (missing Track_ID column).")
+
+

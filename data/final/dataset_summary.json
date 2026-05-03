@@ -1,0 +1,39 @@
+{
+  "dataset_info": {
+    "version": "v1.0",
+    "created": "2025-10-12T23:37:42.848224",
+    "n_observations": 13118,
+    "n_unique_tracks": 115,
+    "time_range": {
+      "start": "2025-09-20T00:15:00",
+      "end": "2025-09-25T23:45:00"
+    },
+    "spatial_coverage": {
+      "lat_min": -19.900625,
+      "lat_max": 25.445333333333338,
+      "lon_min": 40.19111111111111,
+      "lon_max": 109.33090909090909
+    }
+  },
+  "thermal_stats": {
+    "Tb_mean": {
+      "mean": 220.69273054957807,
+      "std": 7.920637294280886,
+      "min": 200.0,
+      "max": 251.3459625244141
+    }
+  },
+  "morphology_stats": {
+    "area_km2": {
+      "mean": 3619.3992986735784,
+      "std": 3666.806729340771,
+      "min": 160.0,
+      "max": 29552.0
+    }
+  },
+  "quality_summary": {
+    "good": 13118,
+    "suspect": 0,
+    "missing": 0
+  }
+}
